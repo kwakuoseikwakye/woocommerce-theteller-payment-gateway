@@ -4,13 +4,12 @@
 **Tags:** woocommerce, payment gateway, Theteller, PaySwitch, payswitch ghana pay, PaySwitch pay, Theteller.net, online payment, gh online payment, buy sell connect, ghana pay, pay gh, pay ghana, payment hub, Ghana payment hub, pay direct, mobile wallet payment, mobile money payment, tigo cash payment, airtel money payment, send money, gh pay, gh payment platform, Ghana payment platform, woocommerce plugin, Theteller WooCommerce Payment Gateway  
 **Author URI:** [https://theteller.net](https://theteller.net)  
 **Author:** Kwaku Osei Kwakye  
-**Requires at least:** 4.0  
-**Tested up to:** 8.0.2  
-**Stable tag:** 4.0  
-**Version:** 4.0  
-**WC requires at least:** 4.0  
-**WC tested up to:** 8.0  
-**Requires PHP:** 8.0 or Higher  
+**Requires at least:** 6.0  
+**Tested up to:** 6.5 
+**Stable tag:** 2.0
+**WC requires at least:** 8.0 
+**WC tested up to:** 8.9  
+**Requires PHP:** 7.4 or Higher  
 **License:** GPLv3 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-3.0.html](http://www.gnu.org/licenses/gpl-3.0.html)
 
@@ -87,7 +86,7 @@ Theteller SMS allows you to send SMS to your customer as a receipt after a succe
 
 ## Contributors & Developers
 Developed by: Kwaku Osei Kwakye  
-Email: kokwakye@payswitch.com.gh
+Email: dev.kwakye@gmail.com
 
 ### Reason for creating this plugin:
 E-commerce is fast-becoming the convenient go-to in sales strategy for most sellers. The reason being cost-saving, wide reach, and the relative ease of management of clients and staff. Ghana, a developing nation, has caught on to this recent rave. In doing this, Ghanaian e-commerce owners have also realized the ease, convenience, and efficiency of using such a strategy with many choosing WordPress WooCommerce as their preferred E-Commerce system. However, the only inhibiting factor is the absence of a payment facilitation tool to complete the online buying experience.
