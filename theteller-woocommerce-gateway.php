@@ -2,14 +2,14 @@
 
 /**
  * Plugin Name: WooCommerce PaySwitch Theteller Payment Gateway
- * Plugin URI: https://wordpress.org/plugins/woocommerce-theteller-payment-gateway/
+ * Plugin URI: https://theteller.net
  * Description: PaySwitch Theteller Payment gateway for WooCommerce
- * Version: 4.0
+ * Version: 1.0
  * Author: Kwaku Osei Kwakye
- * Author URI: https://theteller.net
- * Requires at least: 3.0
- * Tested up to: 8.0.2
- * WC requires at least: 4.0
+ * Author URI: https://github.com/kwakuoseikwakye
+ * Requires at least: 6.0
+ * Tested up to: 6.5
+ * WC requires at least: 5.0
  * WC tested up to: 8.0
  */
 
@@ -699,3 +699,9 @@ function woocommerce_theteller_init()
       add_filter("plugin_action_links_$plugin", [WC_Theteller::class, 'woocommerce_add_theteller_settings_link']);
       add_filter('woocommerce_payment_gateways', [WC_Theteller::class, 'woocommerce_add_theteller_gateway']);
 }
+
+add_action('before_woocommerce_init', function () {
+      if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+      }
+});
