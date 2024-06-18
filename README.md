@@ -5,7 +5,7 @@
 **Author URI:** [https://theteller.net](https://theteller.net)  
 **Author:** Kwaku Osei Kwakye  
 **Requires at least:** 5.0  
-**Tested up to:** 8.0.2  
+**Tested up to:** 6.5 
 **Stable tag:** 1.0  
 **Version:** 1.0  
 **WC requires at least:** 5.0  
