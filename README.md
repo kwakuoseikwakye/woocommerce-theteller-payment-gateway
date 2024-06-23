@@ -3,7 +3,7 @@
 **Contributors:** Kwaku Osei Kwakye  
 **Tags:** woocommerce, payment gateway, Theteller, PaySwitch, payswitch ghana pay, PaySwitch pay, Theteller.net, online payment, gh online payment, buy sell connect, ghana pay, pay gh, pay ghana, payment hub, Ghana payment hub, pay direct, mobile wallet payment, mobile money payment, tigo cash payment, airtel money payment, send money, gh pay, gh payment platform, Ghana payment platform, woocommerce plugin, Theteller WooCommerce Payment Gateway  
 **Author URI:** [https://theteller.net](https://theteller.net)  
-**Author:** Kwaku Osei Kwakye  
+**Author:** Kwaku Osei Kwakye
 **Requires at least:** 6.0  
 **Tested up to:** 6.5 
 **Stable tag:** 2.0

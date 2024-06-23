@@ -162,7 +162,7 @@ class WC_Theteller extends WC_Payment_Gateway
                   'channel' => array(
                         'title' => __('Channel', 'theteller'),
                         'type' => 'select',
-                        'options' => array('Card Only','Mobile Money Only','Both'),
+                        'options' => array('Card Only', 'Mobile Money Only', 'Both'),
                         'description' => __('Select channel that you want to allow on the checkout page. Default is : Both ', 'client')
                   ),
 
@@ -213,12 +213,6 @@ class WC_Theteller extends WC_Payment_Gateway
 
       public function send_request_to_theteller_api($order_id)
       {
-            // Get WooCommerce order object
-            $order = wc_get_order($order_id);
-            if (!$order) {
-                  return ''; // Return empty if order is not found
-            }
-
             // Getting settings...
             $merchantname = $this->merchant_name;
             $merchantid = $this->merchant_id;
@@ -229,7 +223,7 @@ class WC_Theteller extends WC_Payment_Gateway
             $customer_email = $order->get_billing_email();
             $currency = $this->currency;
             $channel = $this->channel;
-
+            $order = new WC_Order($order_id);
             // Redirect URL
             $redirect_url = wc_get_checkout_url() . '?order_id=' . $order_id . '&theteller_response';
 
@@ -276,7 +270,7 @@ class WC_Theteller extends WC_Payment_Gateway
                         'amount' => $minor,
                         'email' => $customer_email,
                         'redirect_url' => $redirect_url,
-                        'payment_method'=> $channel,
+                        'payment_method' => $channel,
                         'currency' => $currency
                   ]),
                   'method' => 'POST',
