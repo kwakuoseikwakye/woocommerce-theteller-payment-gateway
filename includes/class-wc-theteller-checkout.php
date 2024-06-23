@@ -1,9 +1,4 @@
 <?php
-
-if (!defined('ABSPATH')) {
-      exit;
-}
-
 class WC_Theteller extends WC_Payment_Gateway
 {
       public static $log_enabled = false;
@@ -78,19 +73,19 @@ class WC_Theteller extends WC_Payment_Gateway
             $this->method_title = __('PaySwitch Theteller', 'woocommerce');
             $this->method_description = __('Pay with Mobile Money and Card via Theteller Checkout.', 'woocommerce');
             $this->icon = apply_filters('woocommerce_theteller_icon', plugins_url('assets/images/logo.png', __FILE__));
-            $this->has_fields = true;
+            $this->has_fields = false;
 
-            $this->title = $this->get_option('title');
-            $this->description = $this->get_option('description');
-            $this->enabled     = $this->get_option('enabled');
+            $this->title = $this->settings['title'];
+            $this->description = $this->settings['description'];
+            $this->enabled     = $this->settings['enabled'];
 
-            $this->merchant_name = $this->get_option('merchant_name');
-            $this->currency = $this->get_option('currency');
-            $this->channel = $this->get_option('channel');
-            $this->merchant_id = $this->get_option('merchant_id');
+            $this->merchant_name = $this->settings['merchant_name'];
+            $this->currency = $this->settings['currency'];
+            $this->channel = $this->settings['channel'];
+            $this->merchant_id = $this->settings['merchant_id'];
 
-            $this->apiuser = $this->get_option('apiuser');
-            $this->apikey = $this->get_option('apikey');
+            $this->apiuser = $this->settings['apiuser'];
+            $this->apikey = $this->settings['apikey'];
             $this->go_live = $this->settings['go_live'];
 
             $this->api_base_url = $this->settings['go_live'] == 'yes' ? self::BASE_URLS['prod'] : self::BASE_URLS['test'];
@@ -112,8 +107,11 @@ class WC_Theteller extends WC_Payment_Gateway
                   $this->process_payment($_GET["order_id"]);
             }
 
-            add_action('wp_enqueue_scripts', array($this, 'process_payment'));
-            add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
+            if (version_compare(WC()->version, '8.0.0', '>=')) {
+                  add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
+            } else {
+                  add_action('woocommerce_update_options_payment_gateways', [$this, 'process_admin_options']);
+            }
       }
 
       public function init_form_fields()
@@ -161,22 +159,18 @@ class WC_Theteller extends WC_Payment_Gateway
                         'description' => __('Select your currency. Default is : GHS', 'client')
                   ),
 
-
                   'channel' => array(
                         'title' => __('Channel', 'theteller'),
                         'type' => 'select',
-                        'options' => array('Card Only', 'Mobile Money Only', 'Both'),
+                        'options' => array('Card Only','Mobile Money Only','Both'),
                         'description' => __('Select channel that you want to allow on the checkout page. Default is : Both ', 'client')
                   ),
-
-
 
                   'merchant_name' => array(
                         'title' => __('Merchant Name / Shop name / Company Name ', 'theteller'),
                         'type' => 'text',
                         'description' => __('This will be use for the payment description. ')
                   ),
-
 
                   'merchant_id' => array(
                         'title' => __('Merchant ID', 'theteller'),
@@ -281,7 +275,9 @@ class WC_Theteller extends WC_Payment_Gateway
                         'desc' => "Payment to " . $merchantname,
                         'amount' => $minor,
                         'email' => $customer_email,
-                        'redirect_url' => $redirect_url
+                        'redirect_url' => $redirect_url,
+                        'payment_method'=> $channel,
+                        'currency' => $currency
                   ]),
                   'method' => 'POST',
                   'timeout' => 60,
@@ -327,9 +323,6 @@ class WC_Theteller extends WC_Payment_Gateway
 
       public function process_payment($order_id)
       {
-            if ($this->enabled === 'no') {
-                  return;
-            }
             $order_id = $_GET['order_id'];
             WC()->session->set('theteller_wc_order_id', $order_id);
             $order = wc_get_order($order_id);
