@@ -307,7 +307,9 @@ function woocommerce_theteller_init()
                               'desc' => "Payment to " . $merchantname . "",
                               'amount' => $minor,
                               'email' => $customer_email,
-                              'redirect_url' => $redirect_url
+                              'redirect_url' => $redirect_url,
+                              'payment_method' => $channel,
+                              'currency' => $currency
                         ]),
                         "method" => "POST",
                         "timeout" => 60,
